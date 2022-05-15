@@ -1,3 +1,8 @@
-body{
+body {
+  background-color: lightblue;
+}
 
+h2 {
+  color: Red;
+  text-align: center;
 }
