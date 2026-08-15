@@ -34,6 +34,18 @@
                     <a class="hero-tag" href="#mcp">MCP</a>
                 </div>
             </div>
+            <div class="design-controls">
+                <div class="design-switch" role="tablist" aria-label="Design formats">
+                    <button class="design-btn active" data-format="format-1" aria-pressed="true">Format 1</button>
+                    <button class="design-btn" data-format="format-2" aria-pressed="false">Format 2</button>
+                    <button class="design-btn" data-format="format-3" aria-pressed="false">Format 3</button>
+                </div>
+                <div class="preview-switch" role="tablist" aria-label="Preview sizes">
+                    <button class="preview-btn active" data-preview="desktop" aria-pressed="true">Desktop</button>
+                    <button class="preview-btn" data-preview="tablet" aria-pressed="false">Tablet</button>
+                    <button class="preview-btn" data-preview="mobile" aria-pressed="false">Mobile</button>
+                </div>
+            </div>
             <div class="hero-panel">
                 <div class="panel-card carousel-card" aria-label="Learning path preview">
                     <div class="carousel-track">
@@ -1959,6 +1971,133 @@ print(response)</code></pre>
             </div>
         </div>
     </section>
+
+    <section id="agentic-tutorials" class="section agentic-tutorials">
+        <div class="section-header">
+            <div>
+                <span class="section-label">Tutorials</span>
+                <h2>Agentic AI — Step-by-step Tutorials</h2>
+            </div>
+        </div>
+        <div class="section-content">
+            <p class="lead">Practical, easy-to-follow guides to build LLM-powered agents, RAG pipelines,
+                and MCP-based tool integrations. Each tutorial has a short explanation, a minimal code
+                example, and exercises you can try locally.</p>
+
+            <div class="two-column">
+                <div class="box">
+                    <h3>1) Build a Minimal LLM Agent</h3>
+                    <p class="tutorial-step">Goal: create an agent that can call one tool (calculator) and return
+                        results combined with generated text. Useful to learn tool wrapping, prompts, and
+                        simple orchestration.</p>
+                    <div class="code-panel">
+                        <pre><code># Pseudo-Python (conceptual)
+from llm_client import LLM
+
+llm = LLM(model='gpt-4o-mini')
+
+def calculate(expr: str) -> str:
+    return str(eval(expr))
+
+prompt = """
+You are an assistant that can call the calculator tool.
+User: Compute 12 * 9 and explain briefly.
+"""
+
+response = llm.run_with_tools(prompt, tools={'calculator': calculate})
+print(response)
+</code></pre>
+                    </div>
+                    <p class="exercise"><strong>Try:</strong> Replace `calculate` with a safe math parser,
+                        add input validation, and test with different expressions.</p>
+                </div>
+
+                <div class="box">
+                    <h3>2) Add Retrieval (RAG) to Improve Factuality</h3>
+                    <p class="tutorial-step">Goal: attach a small document store so the agent can fetch
+                        context before answering. This reduces hallucinations for domain-specific queries.</p>
+                    <div class="code-panel">
+                        <pre><code># Pseudo-Python (conceptual)
+from vectorstore import InMemoryVectorStore
+from llm_client import LLM
+
+store = InMemoryVectorStore()
+store.add('doc1', 'Python is a popular programming language')
+
+llm = LLM(model='gpt-4o-mini')
+
+def answer(query: str):
+    hits = store.search(query, top_k=3)
+    context = "\n\n".join([h.text for h in hits])
+    prompt = f"Use the context below to answer:\n\n{context}\n\nQuestion: {query}"
+    return llm.generate(prompt)
+</code></pre>
+                    </div>
+                    <p class="exercise"><strong>Try:</strong> Add more documents, tune `top_k`, and
+                        compare answers with/without retrieval.</p>
+                </div>
+            </div>
+
+            <div class="two-column">
+                <div class="box">
+                    <h3>3) MCP: Expose a Tool with a Manifest</h3>
+                    <p class="tutorial-step">Goal: describe a tool with a manifest and let the agent call it
+                        through a protocol server. This is how MCP standardizes tool interfaces.</p>
+                    <div class="code-panel">
+                        <pre><code>{
+  "tool_name": "weather_service",
+  "description": "Fetch current weather for a city",
+  "endpoint": "https://api.example.com/weather",
+  "inputs": {"city":"string"},
+  "outputs": {"temperature":"number","condition":"string"}
+}
+# Client: use MCPClient to dispatch calls to registered tools
+</code></pre>
+                    </div>
+                    <p class="exercise"><strong>Try:</strong> Create a mock endpoint and test the
+                        manifest-driven call sequence.</p>
+                </div>
+
+                <div class="box">
+                    <h3>4) Agentic AI Concepts & Safety</h3>
+                    <p class="tutorial-step">Short checklist: plan, limit tool permissions, validate outputs,
+                        rate-limit external calls, and log activity for audit and replay.</p>
+                    <ul>
+                        <li>Design a planner that produces short steps.</li>
+                        <li>Sandbox tools so they can only perform necessary actions.</li>
+                        <li>Always validate tool outputs before using them in prompts.</li>
+                        <li>Keep prompts concise, add role definitions, and request output formats.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="box">
+                <h3>Practice Checklist & Learning Steps</h3>
+                <ul class="checklist">
+                    <li>Step 1: Understand LLM basics — tokens, prompts, sampling.</li>
+                    <li>Step 2: Build simple prompt-based apps (chat, summarization).</li>
+                    <li>Step 3: Add retrieval (RAG) with embeddings and a vector store.</li>
+                    <li>Step 4: Expose tools with MCP manifests and implement a client.</li>
+                    <li>Step 5: Create an agent that plans, calls tools, and verifies results.</li>
+                    <li>Step 6: Add monitoring, tracing, and safety checks (rate-limits, validation).</li>
+                    <li>Step 7: Evaluate with real tasks, measure correctness and usefulness.</li>
+                </ul>
+            </div>
+
+            <div class="box">
+                <h3>Additional Concepts You Should Know</h3>
+                <ul>
+                    <li>Embeddings and vector search (Chroma, Pinecone, Weaviate)</li>
+                    <li>Prompt templates and output parsers (JSON schemas)</li>
+                    <li>Tool sandboxing and authentication</li>
+                    <li>Evaluation metrics: accuracy, precision, user satisfaction</li>
+                    <li>Human-in-the-loop review and feedback loops</li>
+                    <li>Data privacy and secure credential handling</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
     </main>
 
     <button class="back-to-top" type="button" aria-label="Back to top" hidden>
@@ -2046,6 +2185,43 @@ print(response)</code></pre>
                 topBtn.addEventListener('click', function ()
                 {
                     window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+        })();
+    </script>
+    <script>
+        // Design format and preview switcher
+        (function ()
+        {
+            var designBtns = document.querySelectorAll('.design-btn');
+            var previewBtns = document.querySelectorAll('.preview-btn');
+            var page = document.querySelector('.page-shell');
+            if (designBtns && designBtns.length)
+            {
+                designBtns.forEach(function (b)
+                {
+                    b.addEventListener('click', function ()
+                    {
+                        document.body.classList.remove('format-1', 'format-2', 'format-3');
+                        document.body.classList.add(b.dataset.format);
+                        designBtns.forEach(function (x) { x.classList.remove('active'); x.setAttribute('aria-pressed', 'false'); });
+                        b.classList.add('active');
+                        b.setAttribute('aria-pressed', 'true');
+                    });
+                });
+            }
+            if (previewBtns && previewBtns.length && page)
+            {
+                previewBtns.forEach(function (b)
+                {
+                    b.addEventListener('click', function ()
+                    {
+                        page.classList.remove('preview-desktop', 'preview-tablet', 'preview-mobile');
+                        page.classList.add('preview-' + b.dataset.preview);
+                        previewBtns.forEach(function (x) { x.classList.remove('active'); x.setAttribute('aria-pressed', 'false'); });
+                        b.classList.add('active');
+                        b.setAttribute('aria-pressed', 'true');
+                    });
                 });
             }
         })();
