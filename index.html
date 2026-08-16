@@ -1868,6 +1868,119 @@ graph.add_conditional_edges(
         </div>
     </section>
 
+    <section id="ide-integration" class="section showcase">
+        <div class="section-header">
+            <div>
+                <span class="section-label">IDE</span>
+                <h2>IDE Integration — VS Code & AI Coding Agents</h2>
+            </div>
+        </div>
+        <div class="section-content">
+            <p>This section shows practical steps to integrate AI coding agents into VS Code, create simple
+                agents with LangChain, manage memory and tools, and run quick tests locally.</p>
+
+            <div class="box">
+                <h3>VS Code: Quick Setup</h3>
+                <ul>
+                    <li>Install: <strong>Python</strong>, <strong>Pylance</strong>, and <strong>Code Runner</strong>.
+                    </li>
+                    <li>Recommended AI extensions: GitHub Copilot (if available), Tabnine, CodeGPT, or local-proxy
+                        extensions that support custom endpoints.</li>
+                    <li>Use the integrated terminal for virtual environments and running examples.</li>
+                    <li>Store API keys in environment variables or use the VS Code secret storage — do not commit
+                        them.</li>
+                </ul>
+            </div>
+
+            <div class="box">
+                <h3>Agent Creation: Steps</h3>
+                <ol>
+                    <li>Define the tools your agent will use (search, calculator, code-runner, web API).</li>
+                    <li>Choose a memory strategy: conversation buffer, summary memory, or entity memory.</li>
+                    <li>Compose prompt templates and tool descriptions so the agent can reason when to call a tool.</li>
+                    <li>Initialize the agent (e.g., LangChain) with LLM, tools, and memory; run and iterate.</li>
+                </ol>
+            </div>
+
+            <div class="box">
+                <h3>LangChain Example — Minimal Python Agent</h3>
+                <p>Save this as <strong>examples/langchain_agent.py</strong> and run in a virtualenv.</p>
+                <div class="code-panel">
+                    <pre><code>from langchain import OpenAI
+from langchain.agents import Tool, initialize_agent, AgentType
+from langchain.memory import ConversationBufferMemory
+
+# LLM (configure with OPENAI_API_KEY or other provider)
+llm = OpenAI(temperature=0)
+
+# Example tool: simple calculator function
+def calculate(expr: str) -> str:
+    try:
+        return str(eval(expr, {}, {}))
+    except Exception as e:
+        return f"error: {e}"
+
+tools = [
+    Tool(name="calculator", func=calculate, description="Evaluate math expressions")
+]
+
+# Memory keeps context across turns
+memory = ConversationBufferMemory(memory_key="chat_history")
+
+# Initialize a react-style agent
+agent = initialize_agent(tools, llm, agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION, memory=memory, verbose=True)
+
+# Run the agent
+print(agent.run("What is 12 * 8? Then explain what recursion is in one short sentence."))</code></pre>
+                </div>
+                <p>Notes: replace <code>OpenAI</code> with your LLM of choice (Anthropic/Azure/Ollama) by using the
+                    appropriate LangChain wrapper.</p>
+            </div>
+
+            <div class="box">
+                <h3>Memory & Tools — Tips</h3>
+                <ul>
+                    <li><strong>ConversationBufferMemory:</strong> Good for short sessions and debugging.</li>
+                    <li><strong>Summary memory:</strong> Compress old messages for long-lived agents.</li>
+                    <li><strong>Entity memory:</strong> Track and recall user-specific facts (preferences, names).</li>
+                    <li>Keep tool outputs structured (JSON or simple text) so the agent can parse and act on them.</li>
+                </ul>
+            </div>
+
+            <div class="box">
+                <h3>Run & Test Locally (VS Code)</h3>
+                <p>Suggested commands:</p>
+                <pre><code>python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+python examples/langchain_agent.py</code></pre>
+                <p>For quick unit tests, add a simple pytest that checks the calculator tool and agent responses.</p>
+            </div>
+
+            <div class="box">
+                <h3>Simple Example Prompts for AI Coding Agents</h3>
+                <ul>
+                    <li>"Write a Python function that returns the nth Fibonacci number with type hints and a test."</li>
+                    <li>"Refactor this function to be more readable and add docstrings."</li>
+                    <li>"Run the tests and return a summary of failing assertions."</li>
+                </ul>
+            </div>
+
+            <div class="box">
+                <h3>Next Steps & Links</h3>
+                <ul>
+                    <li>See the <a href="IDE_TOOLS.md">IDE integration guide</a> for Ollama, Claude, and local proxies.
+                    </li>
+                    <li>Consider adding an example <strong>requirements.txt</strong> with <code>langchain</code>,
+                        <code>openai</code>, and <code>python-dotenv</code>.
+                    </li>
+                    <li>Ask me to scaffold the example files and a test harness if you want runnable code added to the
+                        repo.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
     <section class="section ecosystem">
         <div class="section-header">
             <div>
