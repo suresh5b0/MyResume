@@ -35,15 +35,8 @@
                 </div>
             </div>
             <div class="design-controls">
-                <div class="design-switch" role="tablist" aria-label="Design formats">
+                <div class="design-switch" role="tablist" aria-label="Design format">
                     <button class="design-btn active" data-format="format-1" aria-pressed="true">Format 1</button>
-                    <button class="design-btn" data-format="format-2" aria-pressed="false">Format 2</button>
-                    <button class="design-btn" data-format="format-3" aria-pressed="false">Format 3</button>
-                </div>
-                <div class="preview-switch" role="tablist" aria-label="Preview sizes">
-                    <button class="preview-btn active" data-preview="desktop" aria-pressed="true">Desktop</button>
-                    <button class="preview-btn" data-preview="tablet" aria-pressed="false">Tablet</button>
-                    <button class="preview-btn" data-preview="mobile" aria-pressed="false">Mobile</button>
                 </div>
             </div>
             <div class="hero-panel">
@@ -88,17 +81,52 @@
                 </div>
                 <div class="panel-card panel-accent">
                     <h2>Example Tools</h2>
-                    <ul>
-                        <li>OpenAI GPT</li>
-                        <li>Google AI</li>
-                        <li>Anthropic / Ollama</li>
-                        <li>LangChain / LangGraph</li>
-                        <li>CrewAI / AutoGen</li>
-                        <li>Hugging Face</li>
-                        <li>FastAPI / FastMCP</li>
-                        <li>Azure AI Search</li>
-                        <li>Chroma / Pinecone / Weaviate</li>
-                    </ul>
+                    <div class="tools-grid">
+                        <div class="tools-group">
+                            <h3>Model Providers</h3>
+                            <ul>
+                                <li>OpenAI GPT (GPT-3.5 / GPT-4 / GPT-4o)</li>
+                                <li>Google AI / Vertex AI (Gemma)</li>
+                                <li>Anthropic (Claude)</li>
+                                <li>Meta Llama (Llama 2)</li>
+                                <li>Falcon (TII)</li>
+                                <li>MPT</li>
+                                <li>Vicuna (open-source fine-tuned)</li>
+                                <li>Cohere</li>
+                                <li>Mistral AI</li>
+                                <li>Hugging Face (model hub)</li>
+                            </ul>
+                        </div>
+                        <div class="tools-group">
+                            <h3>Vector Databases</h3>
+                            <ul>
+                                <li>Chroma</li>
+                                <li>Pinecone</li>
+                                <li>Weaviate</li>
+                                <li>Milvus</li>
+                                <li>Qdrant</li>
+                                <li>Redis Vector</li>
+                                <li>OpenSearch</li>
+                            </ul>
+                        </div>
+                        <div class="tools-group">
+                            <h3>Frameworks & Libraries</h3>
+                            <ul>
+                                <li>LangChain</li>
+                                <li>LangGraph</li>
+                                <li>CrewAI / AutoGen</li>
+                                <li>FastAPI / FastMCP</li>
+                            </ul>
+                        </div>
+                        <div class="tools-group">
+                            <h3>Cloud & Infra</h3>
+                            <ul>
+                                <li>AWS SageMaker</li>
+                                <li>Azure AI Search</li>
+                                <li>Vertex AI</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </header>
@@ -234,6 +262,27 @@
                             <li>Contribute to an open-source AI project or create your own.</li>
                         </ul>
                     </div>
+                    <div class="box learning-pattern">
+                        <h3>Learning Pattern — Step by step</h3>
+                        <ol class="learning-steps">
+                            <li><strong>Foundations:</strong> Learn Python, basic statistics, and ML concepts.</li>
+                            <li><strong>Core Models:</strong> Study neural nets, transformers, and tokenization.</li>
+                            <li><strong>Hands-on:</strong> Build simple models and experiment with pre-trained LLM APIs.
+                            </li>
+                            <li><strong>Retrieval:</strong> Implement embeddings, vector DBs, and a basic RAG pipeline.
+                            </li>
+                            <li><strong>Prompting:</strong> Practice prompt engineering, few-shot and chain-of-thought
+                                prompts.</li>
+                            <li><strong>Agents:</strong> Combine tools, memory, and planning into multi-step workflows.
+                            </li>
+                            <li><strong>Evaluation:</strong> Add tests, metrics, and human-in-the-loop validation.</li>
+                            <li><strong>Deployment:</strong> Containerize, add monitoring, and set up MLOps pipelines.
+                            </li>
+                            <li><strong>Safety & Ethics:</strong> Add guardrails, bias checks, and privacy controls.
+                            </li>
+                            <li><strong>Iterate:</strong> Improve with feedback, benchmarks, and user studies.</li>
+                        </ol>
+                    </div>
                     <div class="box">
                         <h3>Learning Checklist</h3>
                         <ul>
@@ -307,13 +356,18 @@
                     <div class="box popular-examples">
                         <h3>Popular Generative AI Examples</h3>
                         <ul>
-                            <li><a href="https://chat.openai.com" target="_blank" rel="noreferrer">OpenAI GPT</a></li>
-                            <li><a href="https://ai.google" target="_blank" rel="noreferrer">Google AI</a></li>
-                            <li><a href="https://www.anthropic.com" target="_blank" rel="noreferrer">Anthropic</a></li>
-                            <li>Ollama for local open-source models like Llama 2, Vicuna, MPT, and gpt4all</li>
-                            <li>Meta Llama</li>
+                            <li><a href="https://chat.openai.com" target="_blank" rel="noreferrer">OpenAI GPT
+                                    (GPT-4)</a></li>
+                            <li><a href="https://ai.google" target="_blank" rel="noreferrer">Google AI (Gemma)</a></li>
+                            <li><a href="https://www.anthropic.com" target="_blank" rel="noreferrer">Anthropic
+                                    (Claude)</a></li>
+                            <li>Meta Llama (Llama 2)</li>
+                            <li>Falcon (TII)</li>
                             <li>Mistral</li>
+                            <li>MPT</li>
+                            <li>Vicuna (community fine-tunes)</li>
                             <li>Qwen</li>
+                            <li>Ollama (local model runner)</li>
                         </ul>
                     </div>
                 </div>
@@ -384,9 +438,11 @@
                     <div class="box">
                         <h3>LLM Examples</h3>
                         <ul>
-                            <li>OpenAI GPT for conversational AI</li>
+                            <li>OpenAI GPT for conversational AI (GPT-3.5, GPT-4)</li>
                             <li>Google Gemma for multimodal tasks</li>
                             <li>Anthropic Claude for safety-focused interactions</li>
+                            <li>Meta Llama (Llama 2) and Vicuna variants</li>
+                            <li>Falcon (TII) and MPT families</li>
                             <li>Ollama for local LLM deployment</li>
                         </ul>
                     </div>
