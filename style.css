@@ -1285,9 +1285,21 @@ body {
 /* Ensure design control remains compact */
 .design-controls { gap: 8px; }
 
-/* Make sure controls are usable on small screens */
+/* Remove design controls styles (controls removed) and improve tools grid responsiveness */
+.tools-grid {
+  gap: 16px;
+}
+
+@media (max-width: 880px) {
+  .tools-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+}
+
 @media (max-width: 640px) {
-  .design-controls { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .tools-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .info-card ul {

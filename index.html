@@ -34,11 +34,7 @@
                     <a class="hero-tag" href="#mcp">MCP</a>
                 </div>
             </div>
-            <div class="design-controls">
-                <div class="design-switch" role="tablist" aria-label="Design format">
-                    <button class="design-btn active" data-format="format-1" aria-pressed="true">Format 1</button>
-                </div>
-            </div>
+            <!-- design controls removed per user preference -->
             <div class="hero-panel">
                 <div class="panel-card carousel-card" aria-label="Learning path preview">
                     <div class="carousel-track">
@@ -446,6 +442,27 @@
                             <li>Ollama for local LLM deployment</li>
                         </ul>
                     </div>
+                    <div class="box">
+                        <h3>LLM Best Practices</h3>
+                        <ul>
+                            <li><strong>Context windows:</strong> Be mindful of token limits and keep prompts concise.
+                            </li>
+                            <li><strong>Costs:</strong> Estimate inference and embedding costs — batch requests and
+                                cache
+                                where possible.</li>
+                            <li><strong>Local vs Hosted:</strong> Use hosted APIs for scalability; prefer local
+                                quantized
+                                models for privacy and offline use-cases.</li>
+                            <li><strong>Instruction Tuning:</strong> Apply instruction-tuning or adapters for consistent
+                                behaviors across tasks.</li>
+                            <li><strong>Evaluation:</strong> Use automated metrics (BLEU, ROUGE, F1) plus human evals
+                                for
+                                quality checks.</li>
+                            <li><strong>Safety:</strong> Add filters, rate-limits, and content policies before
+                                deployment.
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </section>
 
@@ -519,6 +536,29 @@
                                 rewriting.</li>
                             <li><strong>Agentic RAG:</strong> Let an agent decide when to search, which tools to use,
                                 and how to verify results.</li>
+                        </ul>
+                    </div>
+                    <div class="box">
+                        <h3>Improving RAG Quality</h3>
+                        <ul>
+                            <li><strong>Chunking strategy:</strong> Choose chunk sizes that balance context and
+                                precision
+                                (commonly 200–800 tokens).</li>
+                            <li><strong>Embedding selection:</strong> Use an embedding model aligned with your domain
+                                for
+                                better semantic matches.</li>
+                            <li><strong>Reranking:</strong> Combine ANN retrieval with lightweight rerankers or
+                                cross-encoders
+                                to boost final relevance.</li>
+                            <li><strong>Metadata & filters:</strong> Store source, date, and type; use filters to reduce
+                                noisy matches.</li>
+                            <li><strong>Hybrid search:</strong> Mix keyword (BM25/Elasticsearch) + semantic search for
+                                precise retrieval.</li>
+                            <li><strong>Citation & provenance:</strong> Attach source snippets and links in generated
+                                answers to increase trust and auditability.</li>
+                            <li><strong>Latency:</strong> Cache frequent queries, use async retrieval, and tune vector
+                                DB
+                                indexing.</li>
                         </ul>
                     </div>
                     <div class="box">
@@ -1074,6 +1114,25 @@ Markdown</code></pre>
                         </ol>
                     </div>
                     <div class="box">
+                        <h3>Multi-Agent Patterns & Coordination</h3>
+                        <p>Multi-agent systems coordinate specialized agents to solve larger tasks. Common patterns:
+                        </p>
+                        <ul>
+                            <li><strong>Coordinator pattern:</strong> A central orchestrator assigns tasks to worker
+                                agents and aggregates results.</li>
+                            <li><strong>Blackboard pattern:</strong> Agents publish findings to a shared space
+                                (blackboard)
+                                where others can read and act.</li>
+                            <li><strong>Pipeline pattern:</strong> Agents form stages of a pipeline (search → analyze →
+                                summarize).</li>
+                            <li><strong>Peer negotiation:</strong> Agents negotiate roles, trade information, and
+                                resolve
+                                conflicts when overlapping tasks occur.</li>
+                        </ul>
+                        <p>Design considerations: clear interfaces, retry/timeout policies, idempotent tool calls, and
+                            centralized logging for traceability.</p>
+                    </div>
+                    <div class="box">
                         <h3>AI Agents in Practice</h3>
                         <ul>
                             <li><strong>Customer Service Agent:</strong> Handles inquiries, accesses FAQs, and
@@ -1269,6 +1328,21 @@ print(summary)
                             <li>Keep prompt templates separate from system logic for easier tuning.</li>
                             <li>Start with constrained tasks before opening up broader agent freedom.</li>
                             <li>Measure success by correctness, tool efficiency, and user satisfaction.</li>
+                        </ul>
+                    </div>
+                    <div class="box">
+                        <h3>Safety, Monitoring & Governance</h3>
+                        <ul>
+                            <li><strong>Audit logs:</strong> Record agent decisions, tool calls, and data used for
+                                traces and debugging.</li>
+                            <li><strong>Guardrails:</strong> Apply policy filters, rate limits, and action whitelists to
+                                prevent unsafe behavior.</li>
+                            <li><strong>Human oversight:</strong> Add checkpoints for human approval on high-impact
+                                actions.</li>
+                            <li><strong>Testing:</strong> Simulate adversarial and edge cases, and run continuous
+                                integration tests for agent logic.</li>
+                            <li><strong>Monitoring:</strong> Track drift, error rates, hallucination frequency, and tool
+                                latencies.</li>
                         </ul>
                     </div>
                     <div class="box">
